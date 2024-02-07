@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from agent import agent
-import numpy as np
-from lab5_qlearn import Q_learning, Training_Results
+from test_body import Q_learning
 from exploration_strategies import (
     greedy_strategy,
     changing_greedy_strategy,
@@ -10,11 +9,6 @@ from exploration_strategies import (
 
 
 agent1 = agent(0.1, 0.3)
-
-
-# learning_obj.test(2, 30)
-
-
 agent1 = agent(0.1, 0.3)
 agent2 = agent(0.5, 0.3)
 agent3 = agent(0.8, 0.3)
@@ -44,52 +38,36 @@ def average_plot(
     plt.plot([int(x) for x in range(len(average_result))], average_result, label=label1)
 
 
-# learning_obj = Q_learning(agent2)
-# results = learning_obj.learn(strat1, 30)
-# plt.plot(
-#     [x for x in range(len(results.iteration_vals))],
-#     results.iteration_vals,
-#     label="learning rate = 0,5",
-# )
-
-# learning_obj = Q_learning(agent3)
-# results = learning_obj.learn(strat1, 30)
-
-# plt.plot(
-#     [x for x in range(len(results.iteration_vals))],
-#     results.iteration_vals,
-#     label="learning rate = 0,8",
-# )
 strat1 = changing_greedy_strategy(0.4, 0.05, 30)
-opis1 = "epsilon = 0.4, epsilon diff = 0.05, changing step = 10"
+opis1 = (
+    "changing_greedy_strategy: epsilon = 0.4, epsilon diff = 0.05, changing step = 10"
+)
 strat2 = changing_greedy_strategy(0.1, 0.05, 30)
-opis2 = "epsilon = 0.1, epsilon diff = 0.05, changing step = 30"
+opis2 = (
+    "changing_greedy_strategy: epsilon = 0.1, epsilon diff = 0.05, changing step = 30"
+)
 
 strat3 = boltzman_strategy(3)
-opis3 = "T value = 3"
+opis3 = "boltzman_strategy: T value = 3"
 
 strat4 = boltzman_strategy(3)
-opis4 = "T value = 9"
+opis4 = "boltzman_strategy: T value = 9"
 
 strat5 = greedy_strategy(0.4)
-opis5 = "epsilon = 0.4"
+opis5 = "greedy_strategy: epsilon = 0.4"
 
 strat6 = greedy_strategy(0.1)
-opis6 = "epsilon = 0.1"
+opis6 = "greedy_strategy: epsilon = 0.1"
 
 
-average_plot(50, 0.5, 0.1, strat1, 300)
-average_plot(50, 0.5, 0.3, strat1, 300)
-average_plot(50, 0.5, 0.5, strat1, 300)
-average_plot(50, 0.5, 0.7, strat1, 300)
-average_plot(50, 0.5, 0.9, strat1, 300)
-# average_plot(50, 0.3, 0.3, strat5, 300, opis6)
-
-plt.title("Taxi training > average of 50")
-
+average_plot(20, 0.5, 0.3, strat1, 300, opis1)
+average_plot(20, 0.5, 0.3, strat2, 300, opis2)
+average_plot(20, 0.5, 0.3, strat3, 300, opis3)
+average_plot(20, 0.5, 0.3, strat4, 300, opis4)
+average_plot(20, 0.5, 0.3, strat5, 300, opis5)
+average_plot(20, 0.5, 0.3, strat6, 300, opis6)
+plt.title("Taxi training > average of 20")
 plt.xlabel("Iteration of training")
 plt.ylabel("Average total value")
-
-# plt.yscale("log")
 plt.legend()
 plt.show()
